@@ -1,0 +1,17 @@
+@media (max-width: 1110px) {
+    .conteiner {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+
+    .about-us__item {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media (max-width: 769px) { 
+    .about-us__img {
+        height: 211px;
+    }
+}
