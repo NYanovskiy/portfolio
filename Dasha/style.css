@@ -39,7 +39,7 @@ body {
   border-right: .15em solid var(--global-color);
   white-space: nowrap;
   animation: typing 2.0s steps(90, end) forwards;
-  font-size: 2.2ch;
+  font-size: 3ch;
   width: fit-content;
   margin: 2px;
 }
@@ -52,7 +52,7 @@ body {
 
 .lable { 
   color: var(--global-color);
-  font-size: 1ch;
+  font-size: 1.4ch;
 }
 
 @keyframes typing {
@@ -70,9 +70,10 @@ input[type=text] {
 	appearance: none;
 	border: none;
 	outline: none;
-	border-bottom: .2em solid var(--global-color);
+	border-bottom: .3em solid var(--global-color);
 	border-radius: .2em .2em 0 0;
 	padding: .4em;
+  font-size: 1.1em;
 	color: var(--global-color);
   background-color: var(--global-light);
 }
@@ -100,13 +101,14 @@ input[type=text]:-ms-input-placeholder {
 
 /* Data */
 input[type=date] {
-  height: 3ch;
+  height: 4ch;
 	border: .2em solid var(--global-color);
 	padding: .8em .9em;
 	border-radius: 2em;
 	color: var(--global-color);
   background-color: var(--dark-color);
   font-weight: 700;
+  font-size: 1.2em;
 	&::-webkit-datetime-edit { padding: 1em; }
 	&::-webkit-datetime-edit-fields-wrapper { background: rgba(var(--global-color), .2); }
 	&::-webkit-datetime-edit-text { color: var(--global-color); padding: 0 0.3em; }
@@ -128,9 +130,11 @@ button {
 	color: var(--global-color);
 	border-radius: 2em;
 	transition: 1s;
+  font-size: 1.2em;
 	&:hover, &:focus, &:active {
 		background: var(--global-color);
 		color: #fff;
+ 
 	}
 }
 
@@ -140,7 +144,7 @@ button {
   position: absolute;
   right: 0;
   bottom: 0;
-  padding-bottom: 10vw;
+  padding-bottom: 20vw;
 }
 
 .prod-text { 
