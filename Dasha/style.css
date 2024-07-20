@@ -1,0 +1,154 @@
+:root { 
+  --global-color: rgb(213, 0, 142);
+  --global-light: rgb(204, 0, 153, 0.5);
+  --dark-color: black;
+}
+
+body {
+  overflow-y:hidden;
+  background: black;
+  background-size: cover;
+  padding-right: 50px;
+  padding-left: 50px;
+  height: 100vh;
+  color: white;
+  font-family: 'JetBrains Mono', sans-serif;
+  margin: 0;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.texting { 
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.c1 { 
+  display: ruby;
+}
+
+.typed-out {
+  overflow: hidden;
+  border-right: .15em solid var(--global-color);
+  white-space: nowrap;
+  animation: typing 2.0s steps(90, end) forwards;
+  font-size: 2.2ch;
+  width: fit-content;
+  margin: 2px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lable { 
+  color: var(--global-color);
+  font-size: 1ch;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Text */
+
+input {
+  margin-bottom: 10px;
+}
+input[type=text] {
+  height: 3ch;
+	appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid var(--global-color);
+	border-radius: .2em .2em 0 0;
+	padding: .4em;
+	color: var(--global-color);
+  background-color: var(--global-light);
+}
+
+input[type=text]::placeholder {
+	font-size: 12px;
+	color: var(--global-color);
+}
+input[type=text]::-webkit-input-placeholder {
+	font-size: 12px;
+	color: var(--global-color);
+}
+input[type=text]::-moz-placeholder {
+	font-size: 12px;
+	color: var(--global-color);
+}
+input[type=text]:-moz-placeholder {
+	font-size: 12px;
+	color: var(--global-color);
+}
+input[type=text]:-ms-input-placeholder {
+	font-size: 12px;
+	color: var(--global-color);
+}
+
+/* Data */
+input[type=date] {
+  height: 3ch;
+	border: .2em solid var(--global-color);
+	padding: .8em .9em;
+	border-radius: 2em;
+	color: var(--global-color);
+  background-color: var(--dark-color);
+  font-weight: 700;
+	&::-webkit-datetime-edit { padding: 1em; }
+	&::-webkit-datetime-edit-fields-wrapper { background: rgba(var(--global-color), .2); }
+	&::-webkit-datetime-edit-text { color: var(--global-color); padding: 0 0.3em; }
+	&::-webkit-datetime-edit-month-field { color: var(--global-color); }
+	&::-webkit-datetime-edit-day-field { color: var(--global-color); }
+	&::-webkit-datetime-edit-year-field { color: var(--global-color); }
+	&::-webkit-inner-spin-button { display: none; }
+	&::-webkit-calendar-picker-indicator {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(204, 0, 153)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E"); 
+	}
+}
+
+/* Кнопка */
+button {
+	appearance: none;
+	border: .2em solid var(--global-color);
+	background: var(--dark-color);
+	padding: .85em 1.5em;
+	color: var(--global-color);
+	border-radius: 2em;
+	transition: 1s;
+	&:hover, &:focus, &:active {
+		background: var(--global-color);
+		color: #fff;
+	}
+}
+
+.Prod { 
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 10vw;
+}
+
+.prod-text { 
+  font-size: 1.7ch;
+}
+
+.prod {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
