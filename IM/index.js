@@ -1,3 +1,5 @@
+button.onclick = () =>{modal.classList.remove('hidden')}
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
