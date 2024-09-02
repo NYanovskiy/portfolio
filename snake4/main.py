@@ -197,7 +197,7 @@ def heuristic(snake):
     elif snake.pos[1] > snake.food_pos[1]:
         snake.change_dir('UP')
 
-        # Функция для обновления значений с использованием событий
+    # Функция для обновления значений с использованием событий
 def handle_input_events():
     global population_size, mutation_rate, generations
     
