@@ -2,16 +2,26 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const generationDisplay = document.getElementById('generation');
 const bestScoreDisplay = document.getElementById('bestScore');
-const leaderboardDisplay = document.getElementById('leaderboard'); // Добавьте элемент для отображения таблицы
+const leaderboardDisplay = document.getElementById('leaderboard');
+const snakeTableDisplay = document.getElementById('snakeTable');
 
 const gridSize = 20; 
 const rows = canvas.height / gridSize;
 const cols = canvas.width / gridSize;
 const maxTimeWithoutFood = 20 * 60; // 20 секунд * 60 кадров в секунду
 
-// Загрузка изображения фрукта
 const appleImage = new Image();
 appleImage.src = 'apple_077.svg';
+
+let fastMode = false; // Флаг для ускоренного режима
+let skipRendering = false; // Флаг для пропуска отрисовки змейки
+
+// Обработчик нажатия на кнопку
+document.getElementById('toggleFastMode').addEventListener('click', () => {
+    fastMode = !fastMode;
+    skipRendering = fastMode;
+    document.getElementById('toggleFastMode').textContent = fastMode ? 'Выключить ускоренный режим' : 'Включить ускоренный режим';
+});
 
 class Snake {
     constructor(color, dna = null) {
@@ -28,14 +38,13 @@ class Snake {
 
     generateRandomDNA() {
         return {
-            changeDirectionChance: Math.random() * 0.95, // Начальная вероятность случайной смены направления
+            changeDirectionChance: Math.random() * 0.95,
             preferVertical: Math.random(),
             edgeAvoidance: Math.random() * 0.1,
             foodAttraction: Math.random() * 0.1,
-            wallAvoidance: Math.random() * 0.1,
             bodyAvoidance: Math.random() * 0.1,
-            minChangeDirectionChance: 0.01, // Минимальное значение
-            maxChangeDirectionChance: 0.5  // Максимальное значение
+            minChangeDirectionChance: 0.01,
+            maxChangeDirectionChance: 0.5
         };
     }
 
@@ -52,7 +61,7 @@ class Snake {
                 this.dna[key] = Math.random();
             }
         });
-        // Осуществляем мутацию `changeDirectionChance` отдельно
+
         this.dna.changeDirectionChance = Math.min(this.dna.maxChangeDirectionChance,
                                                   Math.max(this.dna.minChangeDirectionChance,
                                                            this.dna.changeDirectionChance + (Math.random() - 0.5) * 0.1));
@@ -157,10 +166,10 @@ class Snake {
 
     turnRandomly() {
         const directions = [
-            { x: 0, y: -1 }, // UP
-            { x: 0, y: 1 },  // DOWN
-            { x: -1, y: 0 }, // LEFT
-            { x: 1, y: 0 }   // RIGHT
+            { x: 0, y: -1 },
+            { x: 0, y: 1 },
+            { x: -1, y: 0 },
+            { x: 1, y: 0 }
         ];
 
         const oppositeDirection = { x: -this.direction.x, y: -this.direction.y };
@@ -169,10 +178,10 @@ class Snake {
 
     randomDirection() {
         const directions = [
-            { x: 0, y: -1 }, // UP
-            { x: 0, y: 1 },  // DOWN
-            { x: -1, y: 0 }, // LEFT
-            { x: 1, y: 0 }   // RIGHT
+            { x: 0, y: -1 },
+            { x: 0, y: 1 },
+            { x: -1, y: 0 },
+            { x: 1, y: 0 }
         ];
         return directions[Math.floor(Math.random() * directions.length)];
     }
@@ -181,9 +190,9 @@ class Snake {
         const distance = Math.hypot(this.body[0].x - closestFruit.x, this.body[0].y - closestFruit.y);
 
         if (distance < this.previousDistanceToFood) {
-            this.fitness += Math.round(this.dna.foodAttraction * 20); 
+            this.fitness += Math.round(this.dna.foodAttraction * 20);
         } else {
-            this.fitness -= Math.round(this.dna.foodAttraction * 10); 
+            this.fitness -= Math.round(this.dna.foodAttraction * 10);
         }
 
         this.previousDistanceToFood = distance;
@@ -191,11 +200,12 @@ class Snake {
         const head = this.body[0];
         const bodyProximity = this.body.some(segment => Math.abs(segment.x - head.x) + Math.abs(segment.y - head.y) <= 1) ? 1 : 0;
         if (bodyProximity) {
-            this.fitness -= this.dna.bodyAvoidance * 50; 
+            this.fitness -= this.dna.bodyAvoidance * 50;
         }
     }
 
     draw() {
+        if (!this.alive || skipRendering) return; // Рисовать только живых змей и если не пропускается отрисовка
         ctx.fillStyle = this.color;
         this.body.forEach(segment => {
             ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
@@ -219,27 +229,29 @@ class Fruit {
     }
 
     draw() {
-        if (appleImage.complete) {
-            ctx.drawImage(appleImage, this.position.x * gridSize, this.position.y * gridSize, gridSize, gridSize);
-        } else {
-            appleImage.onload = () => {
+        if (!skipRendering) {
+            if (appleImage.complete) {
                 ctx.drawImage(appleImage, this.position.x * gridSize, this.position.y * gridSize, gridSize, gridSize);
-            };
+            } else {
+                appleImage.onload = () => {
+                    ctx.drawImage(appleImage, this.position.x * gridSize, this.position.y * gridSize, gridSize, gridSize);
+                };
+            }
         }
     }
 }
 
-const populationSize = 10;
-const mutationRate = 0.05; // Мутация 5%
+let populationSize = parseInt(document.getElementById('populationSize').value);
+let mutationRate = parseFloat(document.getElementById('mutationRate').value);
+let numberOfFruits = parseInt(document.getElementById('numberOfFruits').value);
 let snakes = [];
 const colors = ['#ff0000', '#ff8700', '#ffd300', '#deff0a', '#a1ff0a', '#0aff99', '#0aefff', '#147df5', '#580aff', '#be0aff'];
-let fruits = []; 
+let fruits = [];
 let generation = 0;
 let bestScore = 0;
-let bestSnakeDNA = null; // Хранение ДНК лучшей змеи
-const numberOfFruits = 3;
+let bestSnakeDNA = null;
 
-let leaderboard = []; // Массив для хранения лучших змей
+let leaderboard = [];
 
 function createInitialPopulation() {
     snakes = Array.from({ length: populationSize }, (_, i) => new Snake(colors[i % colors.length], bestSnakeDNA));
@@ -251,14 +263,25 @@ function createFruits() {
 
 function updateLeaderboard(bestSnake) {
     leaderboard.push({ score: bestSnake.score, generation: generation });
-    leaderboard.sort((a, b) => b.score - a.score); // Сортируем по убыванию счета
+    leaderboard.sort((a, b) => b.score - a.score);
     if (leaderboard.length > 10) {
-        leaderboard.pop(); // Оставляем только 10 лучших
+        leaderboard.pop();
     }
 
-    // Обновляем отображение таблицы
     let leaderboardHtml = leaderboard.map((entry, index) => `${index + 1}. Счет: ${entry.score} | Snake Gen: ${entry.generation}`).join('<br>');
     leaderboardDisplay.innerHTML = leaderboardHtml;
+}
+
+function updateSnakeTable() {
+    let snakeTableHtml = snakes.map((snake, index) => {
+        let statusColor = snake.alive ? 'green' : 'red';
+        return `
+            <div style="display: flex; align-items: center;">
+                <div>${index + 1}. Snake | Счет: ${snake.score}</div>
+                <div style="width: 20px; height: 20px; background-color: ${statusColor}; margin-left: 10px;"></div>
+            </div>`;
+    }).join('');
+    snakeTableDisplay.innerHTML = snakeTableHtml;
 }
 
 function nextGeneration() {
@@ -273,7 +296,7 @@ function nextGeneration() {
 
     bestSnakeDNA = bestSnake.dna;
 
-    updateLeaderboard(bestSnake); // Обновляем таблицу лучших змей
+    updateLeaderboard(bestSnake);
 
     snakes = Array.from({ length: populationSize }, (_, i) => {
         if (i === 0) {
@@ -298,12 +321,29 @@ function findClosestFruit(snake) {
 let frameCount = 0;
 
 function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (fastMode) {
+        // Если включен ускоренный режим, пропускаем кадры
+        for (let i = 0; i < 20; i++) {
+            updateGameLogic();
+        }
+    } else {
+        updateGameLogic();
+    }
 
+    if (!skipRendering) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        snakes.forEach(snake => snake.draw());
+        fruits.forEach(fruit => fruit.draw());
+    }
+
+    updateSnakeTable(); // Обновляем таблицу змеек
+
+    requestAnimationFrame(gameLoop);
+}
+
+function updateGameLogic() {
     frameCount++;
     if (frameCount % 10 === 0) {
-        snakes = snakes.filter(snake => snake.alive);
-
         snakes.forEach(snake => {
             if (snake.alive) {
                 const closestFruit = findClosestFruit(snake);
@@ -319,6 +359,11 @@ function gameLoop() {
                         fruits[index] = new Fruit(snakes.map(s => s.body));
                     }
                 });
+
+                if (!snake.alive) {
+                    // Убираем змею с поля после смерти
+                    snake.body = [];
+                }
             }
         });
 
@@ -326,11 +371,17 @@ function gameLoop() {
             nextGeneration();
         }
     }
+}
 
-    snakes.forEach(snake => snake.draw());
-    fruits.forEach(fruit => fruit.draw());
-
-    requestAnimationFrame(gameLoop);
+function restartSimulation() {
+    populationSize = parseInt(document.getElementById('populationSize').value);
+    mutationRate = parseFloat(document.getElementById('mutationRate').value);
+    numberOfFruits = parseInt(document.getElementById('numberOfFruits').value);
+    generation = 0;
+    bestScore = 0;
+    leaderboard = [];
+    createInitialPopulation();
+    createFruits();
 }
 
 createInitialPopulation();

@@ -1,3 +1,39 @@
 .section { 
     display: flex;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Скрываем полосы прокрутки */
+}
+
+#gameCanvas {
+    border: 1px solid black;
+    display: block;
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+}
+
+.snake {
+    /* Класс для змеи */
+    position: absolute;
+    background-color: green;
+    border: 1px solid inherit;
+    width: 20px;
+    height: 20px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.fruit {
+    /* Класс для фрукта */
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
