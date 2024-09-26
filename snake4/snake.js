@@ -38,13 +38,13 @@ class Snake {
 
     generateRandomDNA() {
         return {
-            changeDirectionChance: Math.random() * 0.95,
+            changeDirectionChance: 0.99,
             preferVertical: Math.random(),
             edgeAvoidance: Math.random() * 0.1,
             foodAttraction: Math.random() * 0.1,
             bodyAvoidance: Math.random() * 0.1,
             minChangeDirectionChance: 0.01,
-            maxChangeDirectionChance: 0.5
+            maxChangeDirectionChance: 0.99
         };
     }
 
@@ -64,7 +64,7 @@ class Snake {
 
         this.dna.changeDirectionChance = Math.min(this.dna.maxChangeDirectionChance,
                                                   Math.max(this.dna.minChangeDirectionChance,
-                                                           this.dna.changeDirectionChance + (Math.random() - 0.5) * 0.1));
+                                                           this.dna.changeDirectionChance + (Math.random() - 0.5) * 0.2));
     }
 
     move() {
