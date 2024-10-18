@@ -12,40 +12,46 @@
     <section class="section">
         <canvas class="gameCanvas" id="gameCanvas" width="800" height="800"></canvas>
         <div class="info_panel">
-            <div id="generation">Generation: 0</div>
-            <div id="bestScore">Best Score: 0</div>
-            
-            <h3>Best Таблица</h3>
-            <div id="leaderboard"></div>
+            <div class="information">
+            <div id="generation">Генерация: 0</div>
+            <div id="bestScore">Лучший результат: 0</div>
+        </div>
+            <div class="info-control">
+                <div class="control_panel">
+                    <div>
+                        <label for="populationSize">Популяция:</label>
+                        <input type="number" id="populationSize" value="10">
+                    </div>
+                    <div>
+                        <label for="mutationRate">Мутация:</label>
+                        <input type="number" id="mutationRate" step="0.01" value="0.05">
+                    </div>
+                    <div>
+                        <label for="numberOfFruits">Фрукты:</label>
+                        <input type="number" id="numberOfFruits" value="3">
+                    </div>
+                    <button id="toggleFastMode">Супер скорость</button>
+                    <button onclick="restartSimulation()">Перезагрузить симуляцию</button>
+                    
 
+                </div>
+                <div class="best-table">
+                    <h3>Best Таблица</h3>
+                    <div id="leaderboard"></div>
+                </div>
+                <div class="live-table">
+                    <h3>Live Таблица</h3>
+                    <div id="snakeTable"></div>
+                </div>
+            </div>
+            <div class="graph">
+                <canvas id="topSnakesChart" width="400" height="200"></canvas>
 
-            <h3>Live Таблица</h3>
-            <div id="snakeTable"></div>
-
+                <canvas id="bestScoreChart" width="400" height="200"></canvas>
+            </div>
 
         </div>
-        <div class="control_panel">
-            <div>
-                <label for="populationSize">Популяция:</label>
-                <input type="number" id="populationSize" value="10">
-            </div>
-            <div>
-                <label for="mutationRate">Мутация:</label>
-                <input type="number" id="mutationRate" step="0.01" value="0.05">
-            </div>
-            <div>
-                <label for="numberOfFruits">Фрукты:</label>
-                <input type="number" id="numberOfFruits" value="3">
-            </div>
-            <button onclick="restartSimulation()">Restart Simulation</button>
 
-            <button id="toggleFastMode">Супер скорость</button>
-            <canvas id="topSnakesChart" width="400" height="200"></canvas>
-
-            <canvas id="bestScoreChart" width="400" height="200"></canvas>
-        </div>
-
-        
     </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="snake.js"></script>

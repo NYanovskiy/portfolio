@@ -37,3 +37,44 @@ body {
     width: 20px;
     height: 20px;
 }
+
+.information {
+    margin-bottom: 10px;
+}
+
+.graph {
+    width: 500px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-control {
+    display: flex;
+}
+
+.best-table, live-table {
+    margin-right: 10px;
+    width: 200px;
+}
+
+.control_panel { 
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.section { 
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+input {
+    width: 50%;
+}
+
+label {
+    display: inline-block;
+    width: 90px;
+}
