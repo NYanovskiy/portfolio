@@ -10,17 +10,17 @@
 
 <body>
     <section class="section">
-        <canvas class="gameCanvas" id="gameCanvas" width="800" height="800"></canvas>
-        <div class="info_panel">
-            <div class="information">
-            <div id="generation">Генерация: 0</div>
-            <div id="bestScore">Лучший результат: 0</div>
-        </div>
+        <canvas class="gameCanvas" id="gameCanvas" width="720" height="740"></canvas>
             <div class="info-control">
                 <div class="control_panel">
+                    <div class="info_panel">
+                        <div class="information">
+                        <div id="generation">Генерация: 0</div>
+                        <div id="bestScore">Лучший результат: 0</div>
+                    </div>
                     <div>
                         <label for="populationSize">Популяция:</label>
-                        <input type="number" id="populationSize" value="10">
+                        <input type="number" id="populationSize" value="5">
                     </div>
                     <div>
                         <label for="mutationRate">Мутация:</label>
@@ -30,9 +30,8 @@
                         <label for="numberOfFruits">Фрукты:</label>
                         <input type="number" id="numberOfFruits" value="3">
                     </div>
-                    <button id="toggleFastMode">Супер скорость</button>
-                    <button onclick="restartSimulation()">Перезагрузить симуляцию</button>
-                    
+                    <button onclick="restartSimulation()" class="button-27">Перезагрузить симуляцию</button>
+                    <button id="toggleFastMode" class="button-27">Включить ускоренный режим</button>
 
                 </div>
                 <div class="best-table">
@@ -45,9 +44,9 @@
                 </div>
             </div>
             <div class="graph">
-                <canvas id="topSnakesChart" width="400" height="200"></canvas>
+                <canvas id="topSnakesChart" width="450" height="240"></canvas>
 
-                <canvas id="bestScoreChart" width="400" height="200"></canvas>
+                <canvas id="bestScoreChart" width="450" height="240"></canvas>
             </div>
 
         </div>

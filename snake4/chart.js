@@ -41,7 +41,7 @@ function initializeTopSnakesChart() {
                 tension: 0.1 // Линия будет плавно сглажена
             },
             {
-                label: 'Trend Line',
+                label: 'Линия тренда',
                 data: [], // Данные для линии тренда
                 backgroundColor: 'rgba(0, 0, 0, 0)',
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -110,7 +110,7 @@ function initializeBestScoreChart() {
         data: {
             labels: [], // Поколения будут добавляться сюда
             datasets: [{
-                label: 'Best Score',
+                label: 'Лучший результат',
                 data: [], // Лучшие счета будут добавляться сюда
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
