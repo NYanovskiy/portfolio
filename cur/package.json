@@ -1,7 +1,7 @@
 {
   "name": "productivity-tracker",
   "version": "1.0.0",
-  "homepage": "https://NYanovskiy.github.io/portfolio",
+  "homepage": "https://NYanovskiy.github.io/portfolio/cur",
   "description": "Productivity tracker with tasks, habits and progress visualization",
   "main": "index.js",
   "scripts": {
