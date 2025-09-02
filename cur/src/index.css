@@ -1,0 +1,2879 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+
+/* Global styles - macOS 26 Future Design */
+html, body, #root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0a0a0b 0%, #1a1a1d 100%);
+  overflow-x: hidden;
+  color: #ffffff;
+}
+
+/* Prevent horizontal scroll on mobile */
+* {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+/* CSS Variables for futuristic macOS 26 theming */
+:root {
+  /* Core colors - Future macOS palette */
+  --bg: linear-gradient(135deg, #0a0a0b 0%, #1a1a1d 100%);
+  --card: rgba(28, 28, 30, 0.85);
+  --card-hover: rgba(44, 44, 46, 0.9);
+  --text: #ffffff;
+  --text-secondary: #8e8e93;
+  --muted: #636366;
+  --accent: #007aff;
+  --accent-2: #5856d6;
+  --green: #30d158;
+  --yellow: #ff9f0a;
+  --red: #ff453a;
+  --orange: #ff9500;
+  --orange-light: #ffb84d;
+  --orange-glow: rgba(255, 149, 0, 0.3);
+  
+  /* Modern UI elements */
+  --surface: rgba(72, 72, 74, 0.3);
+  --surface-hover: rgba(99, 99, 102, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 16px 64px rgba(0, 0, 0, 0.7);
+  --glow: 0 0 20px rgba(255, 149, 0, 0.4);
+  
+  /* Typography */
+  --font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Spacing and sizing */
+  --radius-small: 8px;
+  --radius-medium: 16px;
+  --radius-large: 24px;
+  --radius-xl: 32px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Animation */
+  --transition-fast: 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-normal: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Backdrop filter for glass morphism */
+  --backdrop-blur: blur(20px);
+  --backdrop-blur-strong: blur(40px);
+}
+
+/* macOS 26 Dark Theme (Default) */
+.dark {
+  --bg: linear-gradient(135deg, #000000 0%, #1c1c1e 100%);
+  --card: rgba(28, 28, 30, 0.9);
+  --card-hover: rgba(44, 44, 46, 0.95);
+  --text: #ffffff;
+  --text-secondary: #8e8e93;
+  --muted: #636366;
+  --surface: rgba(72, 72, 74, 0.4);
+  --surface-hover: rgba(99, 99, 102, 0.5);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 255, 255, 0.25);
+}
+
+/* macOS 26 Glass Theme - Ultra Future */
+.glass {
+  --bg: linear-gradient(135deg, 
+    rgba(10, 10, 11, 0.8) 0%, 
+    rgba(26, 26, 29, 0.9) 50%, 
+    rgba(44, 44, 46, 0.8) 100%);
+  --card: rgba(255, 255, 255, 0.08);
+  --card-hover: rgba(255, 255, 255, 0.15);
+  --text: #ffffff;
+  --text-secondary: #a1a1a6;
+  --muted: #8e8e93;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.15);
+  --border-hover: rgba(255, 255, 255, 0.3);
+}
+
+/* macOS 26 Dark Glass Theme - Deep Space */
+.dark-glass {
+  --bg: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(28, 28, 30, 0.9) 50%, 
+    rgba(44, 44, 46, 0.85) 100%);
+  --card: rgba(28, 28, 30, 0.6);
+  --card-hover: rgba(44, 44, 46, 0.8);
+  --text: #ffffff;
+  --text-secondary: #8e8e93;
+  --muted: #636366;
+  --surface: rgba(72, 72, 74, 0.3);
+  --surface-hover: rgba(99, 99, 102, 0.4);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.2);
+}
+
+/* Midnight Theme - MacBook Pro Inspired */
+.midnight {
+  --bg: linear-gradient(135deg, #000000 0%, #121212 50%, #1e1e1e 100%);
+  --card: rgba(30, 30, 30, 0.75);
+  --card-hover: rgba(40, 40, 40, 0.85);
+  --text: #ffffff;
+  --text-secondary: #b0b0b0;
+  --muted: #7a7a7a;
+  --surface: rgba(40, 40, 40, 0.3);
+  --surface-hover: rgba(50, 50, 50, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --orange: #ff9500;
+  --orange-light: #ffb84d;
+  --orange-glow: rgba(255, 149, 0, 0.4);
+  --accent: #007aff;
+  --accent-2: #5856d6;
+}
+
+/* Space Gray Theme - Modern MacBook */
+.space-gray {
+  --bg: linear-gradient(135deg, #1e1e1e 0%, #2d2f33 50%, #3a3a3c 100%);
+  --card: rgba(58, 58, 60, 0.7);
+  --card-hover: rgba(68, 68, 70, 0.8);
+  --text: #ffffff;
+  --text-secondary: #cacaca;
+  --muted: #8e8e93;
+  --surface: rgba(58, 58, 60, 0.25);
+  --surface-hover: rgba(68, 68, 70, 0.35);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 255, 255, 0.22);
+  --orange: #ff9500;
+  --orange-light: #ffb84d;
+  --orange-glow: rgba(255, 149, 0, 0.4);
+  --accent: #007aff;
+  --accent-2: #5856d6;
+}
+
+/* Graphite Theme - Modern Elegant */
+.graphite {
+  --bg: linear-gradient(135deg, #232325 0%, #2c2c2e 50%, #3a3a3c 100%);
+  --card: rgba(45, 45, 47, 0.75);
+  --card-hover: rgba(55, 55, 57, 0.85);
+  --text: #ffffff;
+  --text-secondary: #c4c4c6;
+  --muted: #8e8e93;
+  --surface: rgba(58, 58, 60, 0.3);
+  --surface-hover: rgba(68, 68, 70, 0.4);
+  --border: rgba(255, 255, 255, 0.15);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --orange: #ff9500;
+  --orange-light: #ffb84d;
+  --orange-glow: rgba(255, 149, 0, 0.4);
+  --accent: #007aff;
+  --accent-2: #5856d6;
+}
+
+/* Gold Theme - Luxury MacBook */
+.gold {
+  --bg: linear-gradient(135deg, #3a2f0b 0%, #5a4717 50%, #7a6023 100%);
+  --card: rgba(122, 96, 35, 0.5);
+  --card-hover: rgba(142, 116, 45, 0.65);
+  --text: #ffffff;
+  --text-secondary: #f0e6d2;
+  --muted: #c9b796;
+  --surface: rgba(122, 96, 35, 0.25);
+  --surface-hover: rgba(142, 116, 45, 0.35);
+  --border: rgba(250, 223, 161, 0.2);
+  --border-hover: rgba(250, 223, 161, 0.3);
+  --orange: #ffd700;
+  --orange-light: #ffeb80;
+  --orange-glow: rgba(255, 215, 0, 0.4);
+  --accent: #c6a93f;
+  --accent-2: #dabe5c;
+}
+
+/* Silver Theme - Classic MacBook */
+.silver {
+  --bg: linear-gradient(135deg, #b8b8b8 0%, #d0d0d0 50%, #e8e8e8 100%);
+  --card: rgba(200, 200, 200, 0.5);
+  --card-hover: rgba(220, 220, 220, 0.65);
+  --text: #333333;
+  --text-secondary: #555555;
+  --muted: #777777;
+  --surface: rgba(180, 180, 180, 0.25);
+  --surface-hover: rgba(200, 200, 200, 0.35);
+  --border: rgba(150, 150, 150, 0.3);
+  --border-hover: rgba(120, 120, 120, 0.4);
+  --orange: #ff9500;
+  --orange-light: #ffb84d;
+  --orange-glow: rgba(255, 149, 0, 0.4);
+  --accent: #007aff;
+  --accent-2: #5856d6;
+}
+
+/* Pink Sunset Theme - Warm Pink */
+.pink {
+  --bg: linear-gradient(135deg, #2d1b3d 0%, #4a1a4a 50%, #7a2d7a 100%);
+  --card: rgba(199, 21, 133, 0.2);
+  --card-hover: rgba(199, 21, 133, 0.3);
+  --text: #ffffff;
+  --text-secondary: #ffb3e6;
+  --muted: #e680c7;
+  --surface: rgba(219, 112, 147, 0.15);
+  --surface-hover: rgba(219, 112, 147, 0.25);
+  --border: rgba(219, 112, 147, 0.3);
+  --border-hover: rgba(219, 112, 147, 0.5);
+  --orange: #db7093;
+  --orange-light: #f0a0c9;
+  --orange-glow: rgba(219, 112, 147, 0.4);
+}
+
+/* macOS 26 Typography - Future Design */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-lg);
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-md);
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-sm);
+}
+
+p, div, span {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.muted {
+  color: var(--muted);
+  font-weight: var(--font-weight-normal);
+  font-size: 0.875rem;
+}
+
+/* macOS 26 Button System - Future Design */
+.btn {
+  border: none;
+  border-radius: var(--radius-medium);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.95rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.02) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active {
+  box-shadow: var(--shadow);
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--surface);
+}
+
+/* Orange Primary Button - macOS 26 Style */
+.btn-primary,
+.btn-orange {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  color: #000000;
+  border: 1px solid rgba(255, 149, 0, 0.3);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--glow), var(--shadow);
+  position: relative;
+}
+
+.btn-primary::before,
+.btn-orange::before {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    rgba(255, 255, 255, 0.1) 100%);
+}
+
+.btn-primary:hover,
+.btn-orange:hover {
+  background: linear-gradient(135deg, #ff8500 0%, var(--orange) 100%);
+  box-shadow: 0 0 30px rgba(255, 149, 0, 0.6), var(--shadow-hover);
+  border-color: rgba(255, 149, 0, 0.5);
+}
+
+.btn-primary:active,
+.btn-orange:active {
+  transform: scale(0.96);
+  box-shadow: var(--glow), var(--shadow);
+}
+
+/* macOS 26 Card System - Future Glass Morphism */
+.card {
+  background: rgba(28, 28, 30, 0.9);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-lg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.01) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.card:hover {
+  background: rgba(40, 40, 45, 0.95);
+  border-color: rgba(255, 105, 0, 0.4);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Glass theme specific card styles */
+.glass .card,
+.dark-glass .card {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* macOS 26 Input System - Future Design */
+input, select, textarea {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  padding: 16px 20px;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow);
+  outline: none;
+  min-height: 48px;
+  letter-spacing: -0.01em;
+}
+
+input:focus, select:focus, textarea:focus {
+  background: var(--surface-hover);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-glow), var(--shadow-hover);
+  color: var(--text);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--muted);
+  font-weight: var(--font-weight-light);
+}
+
+/* Select styling - iPhone style */
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2386868b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.dark select, .dark-glass select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238e8e93' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Option styling for dropdown menus */
+select option {
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-normal);
+}
+
+select option:checked {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+select option:hover {
+  background: var(--surface-hover);
+}
+
+/* Theme-specific option styling */
+.dark select option,
+.dark-glass select option {
+  background: rgba(44, 44, 46, 0.95);
+  color: var(--text);
+}
+
+.dark select option:checked,
+.dark-glass select option:checked {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+.glass select option {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+.blue select option {
+  background: rgba(0, 51, 102, 0.95);
+}
+
+.purple select option {
+  background: rgba(51, 0, 102, 0.95);
+}
+
+.green select option {
+  background: rgba(0, 68, 0, 0.95);
+}
+
+.red select option {
+  background: rgba(68, 0, 0, 0.95);
+}
+
+.pink select option {
+  background: rgba(74, 26, 74, 0.95);
+}
+
+/* macOS 26 Modern Rounded Square Checkboxes - Settings Button Style */
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  border: 3px solid var(--border);
+  border-radius: var(--radius-large);
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hover state */
+.checkbox:hover {
+  border-color: var(--orange);
+  background: var(--surface-hover);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.3), var(--shadow-hover);
+}
+
+/* Focus state */
+.checkbox:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px var(--orange-glow), 0 0 20px rgba(255, 149, 0, 0.4), var(--shadow);
+}
+
+/* Checked state */
+.checkbox:checked {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  border-color: var(--orange);
+  box-shadow: var(--glow), var(--shadow-hover);
+}
+
+/* Enhanced Checkmark Icon */
+.checkbox:checked::before {
+  content: '✓';
+  color: #000000;
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: checkmarkBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Checkmark animation */
+@keyframes checkmarkBounce {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(-45deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+/* Enhanced Ripple Effect */
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-large);
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.4), rgba(255, 184, 77, 0.2));
+  transform: translate(-50%, -50%) scale(0);
+  animation: futuristicRipple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* Enhanced Ripple Animation */
+@keyframes futuristicRipple {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
+}
+
+/* Disabled state */
+.checkbox:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.checkbox:disabled:hover {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* Enhanced pulse effect for newly toggled items */
+.checkbox.pulse {
+  animation: futuristicPulse 0.8s ease-out;
+}
+
+@keyframes futuristicPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.8), var(--shadow);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 149, 0, 0.4), var(--shadow-hover);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0), var(--shadow);
+  }
+}
+
+/* Force rounded square shape across all browsers */
+input[type="checkbox"].checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--radius-large) !important;
+  aspect-ratio: 1 / 1;
+}
+
+/* Ensure rounded square shape on all checkbox elements */
+input.checkbox,
+input[type="checkbox"].checkbox {
+  border-radius: var(--radius-large) !important;
+  width: 36px !important;
+  height: 36px !important;
+  flex: none !important;
+}
+
+/* Enhanced Label Interaction */
+label:has(.checkbox) {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px;
+  border-radius: var(--radius-medium);
+  transition: all var(--transition-fast);
+}
+
+label:has(.checkbox):hover {
+  background: var(--surface);
+}
+
+label:has(.checkbox):hover .checkbox {
+  border-color: var(--orange);
+  background: var(--surface-hover);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.3), var(--shadow-hover);
+}
+
+/* Enhanced Theme-specific Checkbox Styles */
+.dark .checkbox {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.dark .checkbox:hover {
+  border-color: var(--orange);
+  background: var(--surface-hover);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.4), var(--shadow-hover);
+}
+
+.dark .checkbox:focus {
+  box-shadow: 0 0 0 4px var(--orange-glow), 0 0 20px rgba(255, 149, 0, 0.5), var(--shadow);
+}
+
+.dark .checkbox:checked {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  box-shadow: var(--glow), var(--shadow-hover);
+}
+
+/* Glass Theme Checkboxes */
+.glass .checkbox,
+.dark-glass .checkbox {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+.glass .checkbox:checked,
+.dark-glass .checkbox:checked {
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.9), rgba(255, 184, 77, 0.9));
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  box-shadow: 0 0 25px rgba(255, 149, 0, 0.5), var(--shadow);
+}
+
+.dark-glass .checkbox {
+  background: rgba(44, 44, 46, 0.4);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Radio button styles */
+.radio {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--input-border);
+  border-radius: 50%;
+  background: var(--input-bg);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  outline: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.radio:hover {
+  border-color: var(--orange);
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.25);
+}
+
+.radio:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.15), 0 4px 16px rgba(255, 149, 0, 0.25);
+}
+
+.radio:checked {
+  border-color: var(--orange);
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
+}
+
+.radio:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: radio-dot 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes radio-dot {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.radio:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  border-color: #ddd;
+  transform: none;
+}
+
+/* Enhanced focus states for accessibility */
+.checkbox:focus-visible,
+.radio:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+/* Theme-specific radio button styles */
+.dark .radio {
+  background: #2c2c2e;
+  border-color: #48484a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dark .radio:hover {
+  border-color: var(--orange);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.35);
+}
+
+.dark .radio:focus {
+  box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.2), 0 4px 16px rgba(255, 149, 0, 0.35);
+}
+
+.dark .radio:checked {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.4);
+}
+
+/* Glass theme radio buttons */
+.glass .radio,
+.dark-glass .radio {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass .radio:checked,
+.dark-glass .radio:checked {
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.9), rgba(255, 184, 77, 0.9));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dark-glass .radio {
+  background: rgba(44, 44, 46, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Label interaction for radio buttons */
+label:has(.radio) {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+label:has(.radio):hover {
+  background: var(--neutral-hover);
+}
+
+label:has(.radio):hover .radio {
+  border-color: var(--orange);
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.25);
+}
+
+/* Pulse animation for newly selected radio buttons */
+.radio.pulse {
+  animation: radioPulse 0.6s ease-out;
+}
+
+@keyframes radioPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 149, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 149, 0, 0);
+  }
+}
+
+/* Utility classes */
+.muted {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+/* Intuitive Layout System */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.quick-actions .btn {
+  flex: 1;
+  max-width: 200px;
+  justify-content: center;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 12px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.simple-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .simple-grid {
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+  }
+}
+
+.sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.progress-card {
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.1) 0%, rgba(255, 149, 0, 0.05) 100%);
+}
+
+.habits-section {
+  background: linear-gradient(135deg, rgba(48, 209, 88, 0.1) 0%, rgba(48, 209, 88, 0.05) 100%);
+}
+
+/* Mobile optimizations */
+@media (max-width: 1023px) {
+  .simple-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-panel {
+    order: 2;
+  }
+  
+  .main-panel {
+    order: 1;
+  }
+  
+  .quick-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    margin-bottom: 0;
+    z-index: 1000;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  .main-panel {
+    margin-bottom: 80px;
+  }
+  
+  .container {
+    padding-bottom: 80px;
+  }
+}
+
+/* Responsive improvements for the redesigned layout */
+@media (max-width: 768px) {
+  .task-form-inline {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .task-form-inline input,
+  .task-form-inline select {
+    width: 100%;
+  }
+  
+  .task-form-inline div {
+    display: flex;
+    width: 100%;
+  }
+  
+  .task-form-inline button {
+    flex: 1;
+    min-width: 0 !important;
+  }
+  
+  .tasks-habits-card {
+    margin-bottom: 80px; /* Space for bottom navigation */
+  }
+  
+  .main-content {
+    gap: 12px;
+  }
+  
+  /* Fixed bottom navigation on scroll */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .dashboard {
+    order: -1; /* Move dashboard to top on tablets */
+  }
+  
+  .tasks-habits-card {
+    height: calc(100vh - 300px);
+    overflow-y: auto;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1025px) {
+  .dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* Print styles - hide interactive elements when printing */
+@media print {
+  .bottom-nav,
+  .fab-container,
+  .task-form-inline,
+  button {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  body::before {
+    display: none;
+  }
+}
+
+/* Pomodoro Timer Red Theme */
+.modal-content.pomodoro-modal {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(185, 28, 28, 0.1) 100%);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2);
+}
+
+.pomodoro-card {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(185, 28, 28, 0.05) 100%) !important;
+  border: 1px solid rgba(220, 38, 38, 0.2) !important;
+}
+
+.pomodoro-start-btn {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  color: white !important;
+  border: 1px solid #dc2626 !important;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4) !important;
+}
+
+.pomodoro-start-btn:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%) !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6) !important;
+}
+
+.pomodoro-pause-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: white !important;
+  border: 1px solid #f59e0b !important;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4) !important;
+}
+
+.pomodoro-pause-btn:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6) !important;
+}
+
+.pomodoro-secondary-btn {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+  border: 1px solid rgba(220, 38, 38, 0.3) !important;
+}
+
+.pomodoro-secondary-btn:hover {
+  background: rgba(220, 38, 38, 0.2) !important;
+  border-color: #dc2626 !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3) !important;
+}
+
+.pomodoro-close-btn {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+  border: 1px solid rgba(220, 38, 38, 0.3) !important;
+}
+
+.pomodoro-close-btn:hover {
+  background: rgba(220, 38, 38, 0.2) !important;
+  border-color: #dc2626 !important;
+  color: #b91c1c !important;
+}
+
+/* Settings Modal Specific Styling */
+.modal-content.settings-modal {
+  width: 480px;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: hidden;
+}
+
+.modal-content.settings-modal .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--orange) transparent;
+}
+
+.modal-content.settings-modal .card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content.settings-modal .card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content.settings-modal .card::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .modal-content.settings-modal {
+    width: 95vw;
+    height: 95vh;
+    max-height: 95vh;
+  }
+  
+  .modal-content.settings-modal .card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content.settings-modal {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .modal-content.settings-modal .card {
+    padding: 12px;
+  }
+  
+  /* Make theme grid more responsive */
+  .modal-content.settings-modal .card [style*="grid-template-columns"] {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)) !important;
+    gap: 6px !important;
+  }
+  
+  /* Make buttons stack on very small screens */
+  .modal-content.settings-modal .card [style*="flex-wrap"] {
+    flex-direction: column !important;
+  }
+  
+  .modal-content.settings-modal .card [style*="flex-wrap"] button {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Modal styles - iPhone style */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--input-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    width: auto;
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 12px;
+  }
+  
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+}
+
+/* Settings panel - iPhone style */
+.settings-panel {
+  position: fixed;
+  right: 24px;
+  top: 100px;
+  width: 340px;
+  z-index: 1200;
+}
+
+@media (max-width: 1024px) {
+  .settings-panel {
+    right: 20px;
+    width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+/* macOS 26 Settings Gear - Future Design */
+.gear {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-large);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 22px;
+  transition: all var(--transition-normal);
+  background: var(--card);
+  backdrop-filter: var(--backdrop-blur-strong);
+  -webkit-backdrop-filter: var(--backdrop-blur-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+
+.gear::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, 
+    rgba(255, 149, 0, 0.05) 0%, 
+    transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.gear:hover {
+  background: var(--card-hover);
+  border-color: var(--orange);
+  box-shadow: 0 0 30px rgba(255, 149, 0, 0.4), var(--shadow-hover);
+  color: var(--orange-light);
+}
+
+.gear:hover::before {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .gear {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  
+  .gear:hover {
+    transform: none;
+  }
+}
+
+/* macOS 26 Future Background System */
+body {
+  background: var(--bg);
+  background-image: url('https://images.unsplash.com/photo-1506318164473-2dfd3ede3623');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Future overlay for enhanced depth */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 0, 60, 0.5) 0%,
+    rgba(80, 30, 20, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Disable main page scroll when modals are open */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Responsive improvements */
+@media (max-width: 480px) {
+  input, select, textarea {
+    font-size: 16px;
+    padding: 16px;
+  }
+  
+  .btn {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+}
+
+/* Enhanced responsive styles */
+@media (max-width: 640px) {
+  .btn {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+  
+  input, select, textarea {
+    padding: 10px 12px;
+    min-height: 36px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 8px;
+  }
+  
+  .card {
+    padding: 9px;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    min-height: 32px;
+  }
+  
+  input, select, textarea {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    min-height: 32px;
+  }
+}
+
+/* Mobile-first approach for statistics */
+@media (max-width: 768px) {
+  .modal-content[style*="width: 1400px"] {
+    width: 95vw !important;
+    height: 95vh !important;
+    max-width: none !important;
+    max-height: none !important;
+  }
+  
+  .modal-content .card {
+    padding: 14px; /* Уменьшено с 20px на 14px (на 30%) */
+  }
+  
+  .modal-content .card > div:first-child {
+    flex-direction: column;
+    gap: 11px; /* Уменьшено с 16px на 11px (на 31%) */
+  }
+  
+  .modal-content .card > div:first-child h2 {
+    font-size: 1.25rem; /* Уменьшено с 1.5rem на 1.25rem (на 17%) */
+  }
+  
+  .modal-content .card > div:first-child button {
+    align-self: flex-end;
+    margin-top: 0px; /* Убрано */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content .card {
+    padding: 11px; /* Уменьшено с 16px на 11px (на 31%) */
+  }
+  
+  .modal-content .card > div:first-child h2 {
+    font-size: 1.125rem; /* Уменьшено с 1.25rem на 1.125rem (на 10%) */
+  }
+}
+
+/* Responsive grid for statistics cards */
+@media (max-width: 768px) {
+  .modal-content .card > div:nth-child(3) {
+    flex-direction: column;
+    gap: 8px; /* Уменьшено с 12px на 8px (на 33%) */
+  }
+  
+  .modal-content .chart-card {
+    min-width: auto;
+    flex: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content .card > div:nth-child(3) {
+    gap: 5px; /* Уменьшено с 8px на 5px (на 37%) */
+  }
+  
+  .modal-content .chart-card {
+    padding: 11px; /* Уменьшено с 16px на 11px (на 31%) */
+  }
+  
+  .modal-content .chart-card > div:first-child {
+    font-size: 1.25rem; /* Уменьшено с 1.5rem на 1.25rem (на 17%) */
+  }
+  
+  .modal-content .chart-card > div:last-child {
+    font-size: 0.7rem; /* Уменьшено с 0.75rem на 0.7rem (на 7%) */
+  }
+}
+
+/* Responsive charts grid */
+@media (max-width: 768px) {
+  .modal-content .card > div:last-child > div:first-child {
+    grid-template-columns: 1fr;
+    gap: 13px; /* Уменьшено с 20px на 13px (на 35%) */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content .card > div:last-child > div:first-child {
+    gap: 11px; /* Уменьшено с 16px на 11px (на 31%) */
+  }
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .modal-content table {
+    font-size: 0.75rem;
+  }
+  
+  .modal-content th,
+  .modal-content td {
+    padding: 8px 5px; /* Уменьшено с 12px 8px на 8px 5px (на 33% и 37%) */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content table {
+    font-size: 0.7rem;
+  }
+  
+  .modal-content th,
+  .modal-content td {
+    padding: 5px 4px; /* Уменьшено с 8px 6px на 5px 4px (на 37% и 33%) */
+  }
+  
+  /* Calendar very small mobile optimizations */
+  .calendar {
+    padding: 8px; /* Уменьшено с 10px на 8px (на 20%) */
+  }
+  
+  .calendar .month {
+    font-size: 14px; /* Уменьшено с 16px на 14px (на 12%) */
+    margin-bottom: 8px; /* Уменьшено с 10px на 8px (на 20%) */
+  }
+  
+  .calendar .month .nav {
+    width: 24px; /* Уменьшено с 32px на 24px (на 25%) */
+    height: 24px; /* Уменьшено с 32px на 24px (на 25%) */
+  }
+  
+  .calendar .days span {
+    width: 100%;
+    font-size: 10px;
+    padding: 4px 0;
+  }
+  
+  .calendar .dates button {
+    width: 100%;
+    height: 28px; /* Уменьшено с 38px на 28px (на 26%) */
+    font-size: 10px; /* Уменьшено с 12px на 10px (на 17%) */
+  }
+}
+
+/* Additional responsive improvements */
+@media (max-width: 320px) {
+  .container {
+    padding: 5px; /* Уменьшено с 8px на 5px (на 37%) */
+  }
+  
+  .card {
+    padding: 8px; /* Уменьшено с 12px на 8px (на 33%) */
+  }
+  
+  .btn {
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    min-height: 36px;
+  }
+  
+  input, select, textarea {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+  
+  .modal-overlay {
+    padding: 8px;
+  }
+  
+  .modal-content {
+    max-width: 98vw;
+    max-height: 98vh;
+  }
+  
+  .modal-content .card {
+    padding: 12px;
+  }
+  
+  .modal-content .card > div:first-child h2 {
+    font-size: 1.125rem;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 85vh;
+  }
+  
+  .modal-content .card {
+    padding: 16px;
+  }
+  
+  .modal-content .card > div:first-child {
+    flex-direction: row;
+    gap: 8px; /* Уменьшено с 12px на 8px (на 33%) */
+  }
+  
+  .modal-content .card > div:first-child h2 {
+    font-size: 1.125rem; /* Уменьшено с 1.25rem на 1.125rem (на 10%) */
+  }
+  
+  /* Calendar landscape optimizations */
+  .calendar {
+    padding: 10px; /* Уменьшено с 12px на 10px (на 17%) */
+  }
+  
+  .calendar .month {
+    font-size: 16px; /* Уменьшено с 18px на 16px (на 11%) */
+    margin-bottom: 10px; /* Уменьшено с 12px на 10px (на 17%) */
+  }
+  
+  .calendar .month .nav {
+    width: 28px; /* Уменьшено с 34px на 28px (на 18%) */
+    height: 28px; /* Уменьшено с 34px на 28px (на 18%) */
+  }
+  
+  .calendar .days span {
+    width: 100%;
+    font-size: 11px;
+    padding: 5px 0;
+  }
+  
+  .calendar .dates button {
+    width: 100%;
+    height: 30px; /* Уменьшено с 42px на 30px (на 29%) */
+    font-size: 11px; /* Уменьшено с 14px на 11px (на 21%) */
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .checkbox,
+  .radio {
+    border-width: 1px;
+  }
+  
+  .checkbox:checked::after {
+    border-width: 0 1px 1px 0;
+  }
+  
+  .radio:checked::after {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .card:hover,
+  .chart-card:hover {
+    /* Removed transform: none - already no transform effects */
+    box-shadow: var(--iphone-shadow);
+  }
+  
+  .checkbox:hover,
+  .radio:hover {
+    /* Static positioning maintained */
+  }
+  
+  .gear:hover {
+    /* Static positioning maintained */
+  }
+  
+  /* Increase touch targets */
+  .btn {
+    min-height: 40px;
+  }
+  
+  .checkbox,
+  .radio {
+    width: 20px;
+    height: 20px;
+  }
+  
+  input, select, textarea {
+    min-height: 40px;
+  }
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 768px) {
+  .container {
+    padding: 14px; /* Уменьшено с 16px на 14px (на 12%) */
+  }
+  
+  /* Stack buttons vertically on very small screens */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+/* macOS 26 Inline Task Form */
+.task-form-inline {
+  background: var(--card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.task-form-inline:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Responsive task form */
+@media (max-width: 768px) {
+  .task-form-inline {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .task-form-inline input {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+  
+  .task-form-inline button {
+    min-width: 0 !important;
+    flex: 1;
+  }
+  
+  .task-form-inline > div:last-child {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-form-inline {
+    padding: var(--spacing-sm);
+  }
+  
+  .task-form-inline input[type="datetime-local"] {
+    min-width: 0;
+  }
+}
+  
+  /* Better spacing for mobile */
+  .card {
+    margin-bottom: 11px; /* Уменьшено с 16px на 11px (на 31%) */
+  }
+  
+  /* Optimize charts for mobile */
+  .chart-card {
+    overflow: hidden;
+  }
+  
+  /* Improve modal usability on mobile */
+  .modal-content {
+    margin: 5px; /* Уменьшено с 8px на 5px (на 37%) */
+    border-radius: 16px;
+  }
+  
+  /* Calendar mobile optimizations */
+  .calendar {
+    padding: 12px; /* Уменьшено с 16px на 12px (на 25%) */
+  }
+  
+  .calendar .month {
+    font-size: 16px; /* Уменьшено с 18px на 16px (на 11%) */
+    margin-bottom: 12px; /* Уменьшено с 16px на 12px (на 25%) */
+  }
+  
+  .calendar .month .nav {
+    width: 28px; /* Уменьшено с 32px на 28px (на 12%) */
+    height: 28px; /* Уменьшено с 32px на 28px (на 12%) */
+  }
+  
+  .calendar .days span {
+    width: 100%;
+    font-size: 11px;
+    padding: 6px 0;
+  }
+  
+  .calendar .dates button {
+    width: 100%;
+    height: 32px; /* Уменьшено с 36px на 32px (на 11%) */
+    font-size: 12px; /* Уменьшено с 14px на 12px (на 14%) */
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 14px; /* Уменьшено с 20px на 14px (на 30%) */
+  }
+  
+  .grid {
+    gap: 14px; /* Уменьшено с 20px на 14px (на 30%) */
+  }
+  
+  .card {
+    padding: 14px; /* Уменьшено с 20px на 14px (на 30%) */
+  }
+  
+  /* Optimize sidebar for tablet */
+  .grid > div:first-child {
+    min-width: 280px;
+  }
+  
+  .grid > div:last-child {
+    min-width: 280px;
+  }
+  
+  /* Calendar tablet optimizations */
+  .calendar {
+    padding: 16px; /* Уменьшено с 18px на 16px (на 11%) */
+  }
+  
+  .calendar .month {
+    font-size: 18px; /* Уменьшено с 19px на 18px (на 5%) */
+    margin-bottom: 16px; /* Уменьшено с 18px на 16px (на 11%) */
+  }
+  
+  .calendar .month .nav {
+    width: 32px; /* Уменьшено с 38px на 32px (на 16%) */
+    height: 32px; /* Уменьшено с 38px на 32px (на 16%) */
+  }
+  
+  .calendar .days span {
+    width: 100%;
+    font-size: 12px;
+    padding: 7px 0;
+  }
+  
+  .calendar .dates button {
+    width: 100%;
+    height: 34px; /* Уменьшено с 47px на 34px (на 28%) */
+    font-size: 13px; /* Уменьшено с 15px на 13px (на 13%) */
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1400px;
+    padding: 21px; /* Уменьшено с 32px на 21px (на 34%) */
+  }
+  
+  .grid {
+    gap: 21px; /* Уменьшено с 32px на 21px (на 34%) */
+  }
+  
+  .card {
+    padding: 19px; /* Уменьшено с 28px на 19px (на 32%) */
+  }
+  
+  /* Better spacing for large screens */
+  .btn {
+    padding: 9px 16px; /* Уменьшено с 14px 24px на 9px 16px (на 36% и 33%) */
+    font-size: 1rem;
+  }
+  
+  input, select, textarea {
+    padding: 11px 14px; /* Уменьшено с 16px 20px на 11px 14px (на 31% и 30%) */
+    font-size: 1rem;
+  }
+  
+  /* Calendar large screen optimizations */
+  .calendar {
+    padding: 20px; /* Уменьшено с 22px на 20px (на 9%) */
+  }
+  
+  .calendar .month {
+    font-size: 20px; /* Уменьшено с 22px на 20px (на 9%) */
+    margin-bottom: 20px; /* Уменьшено с 22px на 20px (на 9%) */
+  }
+  
+  .calendar .month .nav {
+    width: 36px; /* Уменьшено с 44px на 36px (на 18%) */
+    height: 36px; /* Уменьшено с 44px на 36px (на 18%) */
+  }
+  
+  .calendar .days span {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 0;
+  }
+  
+  .calendar .dates button {
+    width: 100%;
+    height: 40px; /* Уменьшено с 55px на 40px (на 27%) */
+    font-size: 16px; /* Уменьшено с 18px на 16px (на 11%) */
+  }
+}
+
+/* iPhone specific animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card, .btn, .chart-card {
+  animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced focus states for accessibility */
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.checkbox:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Minimalistic delete button styles */
+.btn-delete {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  min-height: 24px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  color: var(--red);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  background: rgba(255, 59, 48, 0.1);
+  border-color: var(--red);
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(255, 59, 48, 0.2);
+}
+
+.btn-delete:active {
+  transform: scale(0.95);
+  background: rgba(255, 59, 48, 0.2);
+}
+
+/* Delete icon using CSS */
+.btn-delete::before {
+  content: '×';
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Responsive adjustments for compact stats */
+@media (max-width: 768px) {
+  .compact-stats-container {
+    padding: 10px 16px;
+  }
+  
+  .compact-stats-block {
+    gap: 20px;
+  }
+  
+  .compact-stat-item {
+    min-width: 80px;
+  }
+  
+  .compact-stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .compact-stat-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .compact-stats-container {
+    padding: 8px 12px;
+  }
+  
+  .compact-stats-block {
+    gap: 16px;
+  }
+  
+  .compact-stat-item {
+    min-width: 70px;
+  }
+  
+  .compact-stat-value {
+    font-size: 1.125rem;
+  }
+  
+  .compact-stat-label {
+    font-size: 0.65rem;
+  }
+}
+
+/* macOS 26 Calendar System - Future Design */
+.calendar {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: var(--card);
+  backdrop-filter: var(--backdrop-blur-strong);
+  -webkit-backdrop-filter: var(--backdrop-blur-strong);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, 
+    rgba(255, 149, 0, 0.03) 0%, 
+    transparent 70%);
+  pointer-events: none;
+}
+
+.calendar:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.calendar .month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: var(--text);
+  width: 100%;
+}
+
+.calendar .month .year {
+  font-weight: 600;
+  margin-left: 10px;
+  color: var(--accent);
+}
+
+.calendar .month .nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--orange);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-medium);
+  transition: all var(--transition-normal);
+  position: relative;
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.calendar .month .nav:hover {
+  background: var(--surface-hover);
+  border-color: var(--orange);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
+  color: var(--orange-light);
+}
+
+.calendar .days {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 12px;
+  width: 100%;
+  gap: 4px;
+}
+
+.calendar .days span {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px 0;
+}
+
+.calendar .dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  gap: 4px;
+}
+
+.calendar .dates button {
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  height: 40px;
+  border-radius: var(--radius-medium);
+  margin: 0;
+  transition: all var(--transition-normal);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.calendar .dates button.today {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  color: #000000;
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--orange);
+  box-shadow: var(--glow), var(--shadow);
+}
+
+.calendar .dates button.selected {
+  background: var(--surface-hover);
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.4), var(--shadow);
+}
+
+.calendar .dates button.other-month {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.calendar .dates button:first-child {
+  grid-column: 1;
+}
+
+.calendar .dates button:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.calendar .dates button:focus {
+  background: var(--surface-hover);
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+  outline: none;
+  border: 2px solid var(--orange);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.3), var(--shadow);
+}
+
+.calendar .dates button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.calendar .dates button:disabled:hover {
+  background: transparent;
+}
+
+/* macOS 26 Productivity Calendar States */
+.calendar .dates button.productive-high {
+  background: linear-gradient(135deg, var(--green) 0%, #32d74b 100%) !important;
+  color: #000000;
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(52, 199, 89, 0.4), var(--shadow);
+}
+
+.calendar .dates button.productive-medium {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%) !important;
+  color: #000000;
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--orange);
+  box-shadow: 0 0 20px rgba(255, 149, 0, 0.4), var(--shadow);
+}
+
+.calendar .dates button.productive-low {
+  background: linear-gradient(135deg, var(--red) 0%, #ff6b6b 100%) !important;
+  color: #ffffff;
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--red);
+  box-shadow: 0 0 20px rgba(255, 59, 48, 0.4), var(--shadow);
+}
+
+/* Achievement star styling */
+.achievement-star {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 8px;
+  opacity: 0.8;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.6;
+    /* Removed transform: scale(0.9) to prevent position changes */
+  }
+  50% {
+    opacity: 1;
+    /* Removed transform: scale(1.1) to prevent position changes */
+  }
+}
+
+/* macOS 26 Productivity Hover States */
+.calendar .dates button.productive-high:hover {
+  background: linear-gradient(135deg, #2ecc40 0%, #32d74b 100%) !important;
+  box-shadow: 0 0 30px rgba(52, 199, 89, 0.6), var(--shadow-hover);
+  border-color: #32d74b;
+}
+
+.calendar .dates button.productive-medium:hover {
+  background: linear-gradient(135deg, #ff8500 0%, var(--orange) 100%) !important;
+  box-shadow: 0 0 30px rgba(255, 149, 0, 0.6), var(--shadow-hover);
+  border-color: var(--orange-light);
+}
+
+.calendar .dates button.productive-low:hover {
+  background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%) !important;
+  box-shadow: 0 0 30px rgba(255, 59, 48, 0.6), var(--shadow-hover);
+  border-color: #ff6b6b;
+}
+
+/* Victory Animation Styles */
+.victory-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.victory-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.confetti-item {
+  position: absolute;
+  top: -10px;
+  font-size: 24px;
+  animation: confetti-fall 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.victory-card {
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--input-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: scale(0.8);
+  animation: victory-appear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes victory-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.victory-header {
+  margin-bottom: 24px;
+}
+
+.victory-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: victory-bounce 1s ease-in-out infinite;
+}
+
+@keyframes victory-bounce {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+.victory-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.victory-content {
+  margin-bottom: 24px;
+}
+
+.victory-date {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.victory-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--input);
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--input-border);
+}
+
+.stat-icon {
+  font-size: 1.25rem;
+  margin-right: 8px;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  flex: 1;
+  text-align: left;
+  margin-left: 8px;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.125rem;
+}
+
+.victory-message {
+}
+
+/* Header with integrated dashboard */
+header {
+  background: rgba(28, 28, 30, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: var(--radius-large);
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+header .simple-dashboard {
+  padding: 0;
+}
+
+header .stat-row {
+  gap: 16px;
+}
+
+header .simple-stat {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+header .simple-stat:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 149, 0, 0.4);
+}
+
+/* Simple Dashboard */
+.simple-dashboard {
+  padding: 0;
+}
+
+.stat-row {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.simple-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-medium);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.simple-stat:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 149, 0, 0.3);
+}
+
+.stat-icon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Tasks and habits tab system */
+.tasks-habits-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 12px;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.tab-button.active {
+  color: var(--orange);
+  border-bottom: 2px solid var(--orange);
+}
+
+.tab-button:hover:not(.active) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  header .simple-dashboard {
+    order: 1;
+  }
+  
+  header > div:last-child {
+    order: 2;
+    align-self: flex-end;
+  }
+  
+  .stat-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .simple-stat {
+    padding: 10px;
+  }
+  
+  .stat-number {
+    font-size: 16px;
+  }
+  
+  .task-form-inline {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .task-form-inline input,
+  .task-form-inline select {
+    width: 100%;
+    flex: none;
+  }
+  
+  .task-form-inline button {
+    width: 100%;
+    min-width: 0;
+  }
+  
+  .quick-actions .btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+  z-index: 900;
+  padding: 8px 0;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: var(--radius-medium);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+  width: 33%;
+  cursor: pointer;
+}
+
+.bottom-nav-item:hover, .bottom-nav-item:active {
+  color: var(--orange);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bottom-nav-icon {
+  font-size: 22px;
+  position: relative;
+}
+
+.bottom-nav-label {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.bottom-nav-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--orange);
+  color: black;
+  font-size: 10px;
+  font-weight: bold;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Floating Action Button */
+.fab-container {
+  position: fixed;
+  bottom: 76px;
+  right: 20px;
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.fab-main {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  color: #000000;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  z-index: 2;
+}
+
+.fab-main:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.fab-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.fab-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-large);
+  background: rgba(28, 28, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.fab-item:hover {
+  background: rgba(44, 44, 46, 0.95);
+  border-color: var(--orange);
+  transform: translateX(-4px);
+}
+
+.fab-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  color: #000000;
+  font-size: 14px;
+}
+
+.fab-label {
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none;
+  }
+  
+  .app-layout {
+    padding-bottom: 16px;
+  }
+  
+  .fab-container {
+    bottom: 32px;
+  }
+}
+
+.victory-close {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  border: none;
+  border-radius: var(--radius-medium);
+  padding: 16px 32px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+  font-family: var(--font-family);
+}
+
+.victory-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+}
+
+.victory-close:active {
+  transform: translateY(0);
+}
+
+/* Responsive victory animation */
+@media (max-width: 768px) {
+  .victory-card {
+    padding: 24px;
+    width: 95%;
+  }
+  
+  .victory-icon {
+    font-size: 3rem;
+  }
+  
+  .victory-title {
+    font-size: 1.5rem;
+  }
+  
+  .confetti-item {
+    font-size: 20px;
+  }
+  
+  .victory-stats {
+    gap: 8px;
+  }
+  
+  .stat-item {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .victory-card {
+    padding: 20px;
+  }
+  
+  .victory-icon {
+    font-size: 2.5rem;
+  }
+  
+  .victory-title {
+    font-size: 1.25rem;
+  }
+  
+  .confetti-item {
+    font-size: 16px;
+  }
+  
+  .victory-close {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+}
