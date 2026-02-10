@@ -1,53 +1,680 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fonts.css">
-    <title>IMNIKITA</title>
-</head>
+    <title>LOVE DAY TEST TO ALINOCHKA</title>
+    <style>
+        :root {
+            --global-color: rgb(213, 0, 142);
+            --global-light: rgba(204, 0, 153, 0.5);
+            --dark-color: black;
+            --dark-bg: #260418;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: var(--dark-bg);
+            padding: 50px;
+            height: 100vh;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Start Page */
+        .texting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .typed-out {
+            overflow: hidden;
+            border-right: 0.15em solid var(--global-color);
+            white-space: nowrap;
+            animation: typing 2s steps(90, end) forwards;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--global-color);
+            margin-top: 20px;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Buttons */
+        button {
+            appearance: none;
+            border: 0.2em solid var(--global-color);
+            background: inherit;
+            padding: 0.85em 1.5em;
+            color: var(--global-color);
+            border-radius: 2em;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        button:hover,
+        button:focus {
+            background: var(--global-color);
+            color: white;
+            box-shadow: 0 0 20px rgba(213, 0, 142, 0.5);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Quiz Page */
+        .question-header {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            font-size: 1rem;
+            color: var(--global-color);
+            opacity: 0.7;
+        }
+
+        .question-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .question-text {
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .label {
+            color: var(--global-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .date-input {
+            height: 3em;
+            border: 0.2em solid var(--global-color);
+            padding: 0.8em 0.9em;
+            border-radius: 2em;
+            color: var(--global-color);
+            background-color: var(--global-light);
+            font-weight: 700;
+            font-size: 1.1em;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            width: 200px;
+        }
+
+        .date-input::-webkit-datetime-edit {
+            padding: 1em;
+        }
+
+        .date-input::-webkit-datetime-edit-fields-wrapper {
+            background: rgba(213, 0, 142, 0.2);
+        }
+
+        .date-input::-webkit-datetime-edit-text {
+            color: var(--global-color);
+            padding: 0 0.3em;
+        }
+
+        .date-input::-webkit-datetime-edit-month-field,
+        .date-input::-webkit-datetime-edit-day-field,
+        .date-input::-webkit-datetime-edit-year-field {
+            color: var(--global-color);
+        }
+
+        .date-input::-webkit-inner-spin-button {
+            display: none;
+        }
+
+        .date-input::-webkit-calendar-picker-indicator {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(213, 0, 142)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border: 0.2em solid var(--global-color);
+            border-radius: 1em;
+            padding: 2em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            animation: slideUp 0.3s ease;
+            max-width: 500px;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-emoji {
+            font-size: 3rem;
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .error-emoji {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-5deg);
+            }
+            75% {
+                transform: rotate(5deg);
+            }
+        }
+
+        .modal-text {
+            font-size: 1.2rem;
+            color: var(--global-color);
+        }
+
+        .modal-message {
+            font-size: 1.3rem;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Result Page */
+        .success-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .main-text {
+            font-size: 1.8rem;
+            max-width: 500px;
+            line-height: 1.6;
+            letter-spacing: 1px;
+        }
+
+        /* Confession Page */
+        .confession-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .confession-text {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Final Page */
+        .final-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .final-text {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--global-color);
+        }
+
+        /* Heart Animation */
+        .heart-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart {
+            position: absolute;
+            background-color: var(--global-color);
+            height: 50px;
+            width: 50px;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+        }
+
+        .heart:after {
+            background-color: var(--global-color);
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0px;
+            left: 25px;
+        }
+
+        .heart:before {
+            background-color: var(--global-color);
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 0px;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(0.6) rotate(-45deg);
+            }
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        /* Production Text */
+        .prod {
+            position: fixed;
+            bottom: 30px;
+            right: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .prod-text {
+            color: white;
+             font-size: 1.2rem;
+        }
+
+        .prod-subtext {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px;
+            }
+
+            .typed-out {
+                font-size: 2rem;
+            }
+
+            .question-text {
+                font-size: 1.5rem;
+            }
+
+            .final-text {
+                font-size: 2rem;
+            }
+
+            .main-text {
+                font-size: 1.4rem;
+            }
+
+            .date-input {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .typed-out {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .final-text {
+                font-size: 1.5rem;
+            }
+
+            .main-text {
+                font-size: 1.1rem;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 0.7em 1.2em;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
 <body>
     <div class="container">
-        <div class="texting">
-            <div class="c1">
-                <h2 class="typed-out">Ангелина</h2>
+        <!-- Start Page -->
+        <div id="startPage" class="page active">
+            <div class="texting">
+                <h1 class="typed-out">Тест на день</h1>
+                <h1 class="typed-out">влюбленных</h1>
+                <p class="subtitle">(три вопроса)</p>
             </div>
-            <div class="c1">
-                <h2 class="typed-out">Приглашаю вас</h2>
-            </div>
-            <div class="c1">
-                <h2 class="typed-out">на свидание</h2>
+            <button onclick="startQuiz()">Начать тест</button>
+            <div class="heart-container">
+                <div class="heart"></div>
             </div>
         </div>
-        <form action="#" class="form" name="submit-to-google-sheet">
-            <label for="" class="lable">Выбери дату</label>
-            <input type="date" id="Date" name="Date">
-            <input type="text" id="text" name="text" placeholder="Напиши что-нибудь">
-            <button type="submit">Отправить</button>
-        </form>
-        <span class="Prod">
-            <span class="prod-text">
-                NYanonskiy
-            </span>
-            <span class="prod-text prod">
-                PRODUCTION
-            </span>
-        </span>
-    </div>
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxkBi_7nY2BXdk8dszFco4ahw7fWwMdlojYMFlUwlVDQI1EliNvuBjMqh_3EoJvPWX9/exec'
-        const form = document.forms['submit-to-google-sheet']
 
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => console.log('Success!', response))
-                .catch(error => console.error('Error!', error.message))
-        })
+        <!-- Quiz Page -->
+        <div id="quizPage" class="page">
+            <div class="question-header">
+                <span id="questionNumber">Вопрос 1 из 3</span>
+            </div>
+            <div class="question-content">
+                <h2 class="question-text" id="questionText"></h2>
+                <div class="form-group">
+                    <label class="label">Выбери дату</label>
+                    <input type="date" id="dateInput" class="date-input">
+                </div>
+                <button onclick="checkAnswer()">Проверить</button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <p class="modal-emoji" id="successEmoji">😌</p>
+                <p class="modal-message" id="successMessage"></p>
+                <button onclick="closeSuccessModal()">Далее</button>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <p class="modal-emoji error-emoji">☹️</p>
+                <p class="modal-text">Неправильно! Попробуй еще раз.</p>
+                <button onclick="retryQuiz()">Пройти заново</button>
+            </div>
+        </div>
+
+        <!-- Confession Modal -->
+        <div id="confessionModal" class="modal">
+            <div class="modal-content">
+                <p class="modal-message" style="font-size: 1.5rem;">думаю и так понятно)))</p>
+                <button onclick="showFinal()">Далее</button>
+            </div>
+        </div>
+
+        <!-- Result Page -->
+        <div id="resultPage" class="page">
+            <div class="success-message">
+                <p class="main-text">Моя умница, ты помнишь все наши самые важные даты.</p>
+                <button onclick="goToConfession()">Далее</button>
+            </div>
+        </div>
+
+        <!-- Confession Page -->
+        <div id="confessionPage" class="page">
+            <div class="confession-content">
+                <p class="confession-text">Хочу сказать, что я тебя</p>
+                <button onclick="showConfessionModal()">нажми на кнопку</button>
+            </div>
+        </div>
+
+        <!-- Final Page -->
+        <div id="finalPage" class="page">
+            <div class="final-content">
+                <h1 class="final-text">Целую, сильно)</h1>
+                <div class="heart-container">
+                    <div class="heart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Production Text -->
+        <div class="prod">
+            <div class="prod-subtext">ВАЛЕНТИНКА ДЛЯ</div>
+            <div class="prod-text">АЛИНОЧКИ</div>
+
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: 'Когда мы познакомились вживую?',
+                correctAnswer: '2025-12-08',
+                correctDate: '08.12.2025',
+                successMessage: 'Молодец, ты ответила правильно на первый, самый простой вопрос',
+                emoji: '😌'
+            },
+            {
+                text: 'Когда начали встречаться?',
+                correctAnswer: '2025-12-28',
+                correctDate: '28.12.2025',
+                successMessage: 'Наша самая важная дата, и ты ее знаешь',
+                emoji: '🥰'
+            },
+            {
+                text: 'Когда первый раз поцеловались?',
+                correctAnswer: '2025-12-30',
+                correctDate: '30.12.2025',
+                successMessage: 'И самую приятную дату ты тоже знаешь',
+                emoji: '😈😘'
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('dateInput').value = '';
+            showPage('quizPage');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Вопрос ${currentQuestion + 1} из 3`;
+            document.getElementById('questionText').textContent = question.text;
+            document.getElementById('dateInput').value = '';
+            document.getElementById('dateInput').focus();
+        }
+
+        function checkAnswer() {
+            const dateInput = document.getElementById('dateInput').value;
+            const question = questions[currentQuestion];
+
+            if (dateInput === question.correctAnswer) {
+                answers.push(dateInput);
+                showSuccessModal(question);
+            } else {
+                document.getElementById('errorModal').classList.add('show');
+            }
+        }
+
+        function showSuccessModal(question) {
+            document.getElementById('successEmoji').textContent = question.emoji;
+            document.getElementById('successMessage').textContent = question.successMessage;
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('show');
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showPage('resultPage');
+            }
+        }
+
+        function retryQuiz() {
+            document.getElementById('errorModal').classList.remove('show');
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('dateInput').value = '';
+            showPage('quizPage');
+            displayQuestion();
+        }
+
+        function goToConfession() {
+            showPage('confessionPage');
+        }
+
+        function showConfessionModal() {
+            document.getElementById('confessionModal').classList.add('show');
+        }
+
+        function showFinal() {
+            document.getElementById('confessionModal').classList.remove('show');
+            showPage('finalPage');
+        }
+
+        // Allow Enter key to submit answer
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('dateInput').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    checkAnswer();
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
