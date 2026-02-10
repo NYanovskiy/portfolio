@@ -483,7 +483,7 @@
             <div class="texting">
                 <h1 class="typed-out">Тест на день</h1>
                 <h1 class="typed-out">влюбленных</h1>
-                <p class="subtitle">(три вопроса.)</p>
+                <p class="subtitle">(три вопроса)</p>
             </div>
             <button onclick="startQuiz()">Начать тест</button>
             <div class="heart-container">
@@ -614,7 +614,6 @@
             document.getElementById('questionNumber').textContent = `Вопрос ${currentQuestion + 1} из 3`;
             document.getElementById('questionText').textContent = question.text;
             document.getElementById('dateInput').value = '';
-            document.getElementById('dateInput').focus();
         }
 
         function checkAnswer() {
