@@ -141,7 +141,7 @@
 /* Extra small devices */
 @media screen and (max-width: 380px) {
     .typed-out {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .question-text {
