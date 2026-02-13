@@ -482,7 +482,7 @@
         <!-- Start Page -->
         <div id="startPage" class="page active">
             <div class="texting">
-                <h1 class="typed-out">Тест на день</h1>
+                <h1 class="typed-out">Тест на день.</h1>
                 <h1 class="typed-out">влюбленных</h1>
                 <p class="subtitle">(три вопроса)</p>
             </div>
@@ -566,44 +566,24 @@
         </div>
     </div>
 
-    <script>
+<script>
     // ====================== ОСНОВНАЯ ЛОГИКА ТЕСТА ======================
     const questions = [
-        {
-            text: 'Когда мы познакомились вживую?',
-            correctAnswer: '2025-12-08',
-            correctDate: '08.12.2025',
-            successMessage: 'Молодец, ты ответила правильно на первый, самый простой вопрос',
-            emoji: '😌'
-        },
-        {
-            text: 'Когда мы начали встречаться?',
-            correctAnswer: '2025-12-28',
-            correctDate: '28.12.2025',
-            successMessage: 'Наша самая важная дата, и ты ее знаешь',
-            emoji: '🥰'
-        },
-        {
-            text: 'Когда первый раз поцеловались?',
-            correctAnswer: '2025-12-30',
-            correctDate: '30.12.2025',
-            successMessage: 'Самую приятную дату ты тоже знаешь',
-            emoji: '😈😘'
-        }
+        { text: 'Когда мы познакомились вживую?', correctAnswer: '2025-12-08', successMessage: 'Молодец, ты ответила правильно на первый, самый простой вопрос', emoji: '😌' },
+        { text: 'Когда мы начали встречаться?', correctAnswer: '2025-12-28', successMessage: 'Наша самая важная дата, и ты ее знаешь', emoji: '🥰' },
+        { text: 'Когда первый раз поцеловались?', correctAnswer: '2025-12-30', successMessage: 'Самую приятную дату ты тоже знаешь', emoji: '😈😘' }
     ];
 
     let currentQuestion = 0;
-    let answers = [];
 
     function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
-        });
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
 
-        // Управляем таптиком в зависимости от страницы
+        // Таптик только на страницах с сердцем
         if (pageId === 'startPage' || pageId === 'finalPage') {
-            startHeartbeatHaptics();
+            // Если уже был первый тап — сразу запускаем
+            if (window.heartbeatStarted) startHeartbeatHaptics();
         } else {
             stopHeartbeatHaptics();
         }
@@ -611,41 +591,36 @@
 
     function startQuiz() {
         currentQuestion = 0;
-        answers = [];
         document.getElementById('dateInput').value = '';
         showPage('quizPage');
         displayQuestion();
     }
 
     function displayQuestion() {
-        const question = questions[currentQuestion];
+        const q = questions[currentQuestion];
         document.getElementById('questionNumber').textContent = `Вопрос ${currentQuestion + 1} из 3`;
-        document.getElementById('questionText').textContent = question.text;
+        document.getElementById('questionText').textContent = q.text;
         document.getElementById('dateInput').value = '';
     }
 
     function checkAnswer() {
-        const dateInput = document.getElementById('dateInput').value;
-        const question = questions[currentQuestion];
-
-        if (dateInput === question.correctAnswer) {
-            answers.push(dateInput);
-            showSuccessModal(question);
+        const input = document.getElementById('dateInput').value;
+        if (input === questions[currentQuestion].correctAnswer) {
+            showSuccessModal(questions[currentQuestion]);
         } else {
             document.getElementById('errorModal').classList.add('show');
         }
     }
 
-    function showSuccessModal(question) {
-        document.getElementById('successEmoji').textContent = question.emoji;
-        document.getElementById('successMessage').textContent = question.successMessage;
+    function showSuccessModal(q) {
+        document.getElementById('successEmoji').textContent = q.emoji;
+        document.getElementById('successMessage').textContent = q.successMessage;
         document.getElementById('successModal').classList.add('show');
     }
 
     function closeSuccessModal() {
         document.getElementById('successModal').classList.remove('show');
         currentQuestion++;
-
         if (currentQuestion < questions.length) {
             displayQuestion();
         } else {
@@ -656,83 +631,75 @@
     function retryQuiz() {
         document.getElementById('errorModal').classList.remove('show');
         currentQuestion = 0;
-        answers = [];
-        document.getElementById('dateInput').value = '';
         showPage('quizPage');
         displayQuestion();
     }
 
-    function goToConfession() {
-        showPage('confessionPage');
-    }
-
-    function showConfessionModal() {
-        document.getElementById('confessionModal').classList.add('show');
-    }
-
+    function goToConfession() { showPage('confessionPage'); }
+    function showConfessionModal() { document.getElementById('confessionModal').classList.add('show'); }
     function showFinal() {
         document.getElementById('confessionModal').classList.remove('show');
         showPage('finalPage');
     }
 
-    // ====================== ТАПТИК В ТАКТ СЕРДЦА ======================
+    // ====================== ТАПТИК СЕРДЦА (самая важная часть) ======================
     let heartbeatInterval = null;
+    window.heartbeatStarted = false;   // флаг, что пользователь уже тапнул
 
     function startHeartbeatHaptics() {
-        if (!('vibrate' in navigator)) return;                    // не iPhone / не поддерживается
+        if (!('vibrate' in navigator)) return;
+        if (heartbeatInterval) return;
 
-        if (heartbeatInterval) return;                            // уже работает
+        const pattern = [30, 50, 30, 890];   // lub-dub, чуть сильнее и надёжнее
 
-        const pattern = [28, 52, 28, 892];                        // lub-dub (идеально под 1-секундную анимацию)
-
-        // Первый удар сразу
         navigator.vibrate(pattern);
-
-        // Продолжаем каждую секунду
         heartbeatInterval = setInterval(() => {
             if (document.visibilityState === 'visible') {
                 navigator.vibrate(pattern);
             }
         }, 1000);
+
+        window.heartbeatStarted = true;
     }
 
     function stopHeartbeatHaptics() {
         if (heartbeatInterval) {
             clearInterval(heartbeatInterval);
             heartbeatInterval = null;
-            navigator.vibrate(0); // остановить вибрацию
+            navigator.vibrate(0);
         }
     }
 
-    // ====================== ЗАПУСК ПРИ ОТКРЫТИИ ======================
+    // ====================== ЗАПУСК ======================
     document.addEventListener('DOMContentLoaded', () => {
-        // Запускаем таптик сразу (startPage активна по умолчанию)
+        // Главный триггер: первый тап по экрану
+        const startTaptic = () => {
+            startHeartbeatHaptics();
+            document.removeEventListener('touchstart', startTaptic);
+            document.removeEventListener('click', startTaptic);
+        };
+
+        document.addEventListener('touchstart', startTaptic, { once: true });
+        document.addEventListener('click', startTaptic, { once: true });
+
+        // Если вдруг уже тапнули до загрузки (редко)
         setTimeout(() => {
-            startHeartbeatHaptics();
-        }, 400);
-
-        // Дополнительная гарантия — после первого тача (Safari часто требует жеста)
-        document.addEventListener('touchstart', () => {
-            startHeartbeatHaptics();
-        }, { once: true });
-
-        // Enter для ввода даты
-        document.getElementById('dateInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                checkAnswer();
+            if (!window.heartbeatStarted && (document.getElementById('startPage').classList.contains('active'))) {
+                startHeartbeatHaptics();
             }
+        }, 800);
+
+        // Enter в поле даты
+        document.getElementById('dateInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') checkAnswer();
         });
     });
 
-    // Останавливаем, когда уходят со страницы
+    // Очистка при уходе
     window.addEventListener('beforeunload', stopHeartbeatHaptics);
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-            stopHeartbeatHaptics();
-        } else if (document.getElementById('startPage').classList.contains('active') ||
-                   document.getElementById('finalPage').classList.contains('active')) {
-            startHeartbeatHaptics();
-        }
+        if (document.visibilityState === 'hidden') stopHeartbeatHaptics();
+        else if (window.heartbeatStarted) startHeartbeatHaptics();
     });
 </script>
 </body>
